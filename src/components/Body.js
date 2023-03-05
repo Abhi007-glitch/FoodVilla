@@ -3,6 +3,7 @@ import { restaurantList } from "./config" // named import
 import { useState,useEffect } from "react"
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import { CORS_API_HOST, SWIGGY_API_URL } from "./config";
 
 
 const Body =  ()=>{
@@ -22,7 +23,9 @@ const Body =  ()=>{
            return filterData;
     }
     
-    const getData = async()=>{const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.2513844&lng=81.62964130000002&page_type=DESKTOP_WEB_LISTING");
+    const getData = async()=>{
+      const URL = `${CORS_API_HOST}${SWIGGY_API_URL}`
+      const data = await fetch(URL);
     const json = await data.json();
     setRestaurantData(json?.data?.cards[2]?.data?.data?.cards);
     setRestaurantFilterdData(json?.data?.cards[2]?.data?.data?.cards)}

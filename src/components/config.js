@@ -1677,3 +1677,6 @@ export const restaurantList = [
         "subtype": "basic"
       },
 ]
+export const CORS_API_HOST = 'https://cors-anywhere.herokuapp.com/';
+
+ export const SWIGGY_API_URL = "https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.2513844&lng=81.62964130000002&page_type=DESKTOP_WEB_LISTING";
