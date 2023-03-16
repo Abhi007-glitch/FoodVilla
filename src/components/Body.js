@@ -3,16 +3,17 @@ import { restaurantList } from "./config" // named import
 import { useState,useEffect } from "react"
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-import { CORS_API_HOST, SWIGGY_API_URL } from "./config";
+import useOnlineStatus from "../utils/useOnlineStatus";
+import { swiggy_api_URL } from "../../const";
 
 
 const Body =  ()=>{
     
     const [searchText,setSearchText] = useState("");
     const [restaurantFilterdData,setRestaurantFilterdData]= useState(restaurantList);
-    const [restaurantData,setRestaurantData]= useState();
+    const [restaurantData,setRestaurantData]= useState(undefined);
   
-
+    
     // this below code show that toggle is a state variable that is returned by useState()
 
     const toggle = useState("false");// state variable
@@ -23,9 +24,16 @@ const Body =  ()=>{
            return filterData;
     }
     
-    const getData = async()=>{
-      const URL = `${CORS_API_HOST}${SWIGGY_API_URL}`
-      const data = await fetch(URL);
+     //created a custom hook for is Online/Offline feature.
+    const isOnline = useOnlineStatus();
+    console.log(isOnline)
+   
+    if (!isOnline)
+    {
+      return (<h1>Opps!! you seems to be offline, please check your internet connection </h1>)
+    }
+
+    const getData = async()=>{const data = await fetch(swiggy_api_URL);
     const json = await data.json();
     setRestaurantData(json?.data?.cards[2]?.data?.data?.cards);
     setRestaurantFilterdData(json?.data?.cards[2]?.data?.data?.cards)}
@@ -33,7 +41,7 @@ const Body =  ()=>{
     
     useEffect( ()=>{
       getData();
-      console.log("UseEffect called ")
+      console.log("UseEffect called ");
     },[])
       console.log("render");
 
@@ -48,20 +56,22 @@ const Body =  ()=>{
         return null;
       }
 
+    
+
+
     return (restaurantData===undefined)?<Shimmer/>:(
        <>
-        <div className="searchContainer">
-           <input value={searchText} type="text" className="search-name" placeholder="Food/Hotel name" onChange={(e)=>{setSearchText( e.target.value)
+       {/* "searchContainer" */}
+        <div className="p-5 bg-pink-50 my-6">
+           <input value={searchText} type="text" className="search-name " placeholder="Food/Hotel name" onChange={(e)=>{setSearchText( e.target.value)
              }} />
-           <button className="search-btn"  type="submit" onClick={()=>{let data = FilterData(searchText,restaurantData)
+           <button className="px-4 mx-4 bg-purple-900 hover:bg-gray-500 text-white rounded-md"  type="submit" onClick={()=>{let data = FilterData(searchText,restaurantData);
             setRestaurantFilterdData(data);}
             } >Search</button>
         </div>
-        <div className="restaurantCardList">
-       
+        {/* restaurantCardList */}
+        <div className="flex flex-wrap justify-center">  
     {
-      
-      
      (restaurantFilterdData.length==0)?<h1>No Restaurant Matching Your Filter Found!!</h1> :restaurantFilterdData.map((restaurant)=>{   
               return (
              <Link to={"/restaurant/"+restaurant.data.id} key ={restaurant.data.id}>

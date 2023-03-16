@@ -2,43 +2,43 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Shimmer from "../components/Shimmer";
 import { IMG_CDN_URL } from "./config";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantHead from "./RestaurantHead";
+import MenuCard from "./MenuCard";
+
+
 const RestaurantMenu = ()=>{
     const params = useParams();
     const {id}= params;
     
+    const restaurant = useRestaurantMenu(id);
     
-    const [restaurant,setRestaurant]= useState(null);
-
-    const getRestaurantMenu = async()=>{
-        const URL = "https://www.swiggy.com/dapi/menu/v4/full?lat=21.2513844&lng=81.62964130000002&menuId="+id;
-        
-
-        const data = await fetch(URL);
-        const json = await data.json();
-       
-        setRestaurant(json);
-    }  
-    
-    useEffect(()=>{
-        getRestaurantMenu();
-    },[]);
+  
    if (restaurant===null)
    {
     return (<Shimmer/>);
    }
 
-    return ((<><div>
-        <h1>Restaurant id :{restaurant?.data?.id}</h1>
-        <h1>{restaurant?.data?.name}</h1>
-        <img src= {"https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/"+restaurant?.data?.cloudinaryImageId}/>
-        
-        <h3>Rating : {restaurant?.data?.avgRatingString} Stars</h3>
-        <h2>Cost for two pices {restaurant?.data?.costForTwoMsg}</h2>
+    return ((<div className=" flex flex-col justify-center">
+
+    <div >
+        <RestaurantHead  key={restaurant?.data?.tid} className="shadow-lg" Name={restaurant?.data?.name} Rating={restaurant?.data?.avgRatingString} Location={restaurant?.data?.locality} cuisines = {restaurant?.data?.cuisines} cloudinaryImageId={restaurant?.data?.cloudinaryImageId} costOfTwo={restaurant?.data?.costForTwoMsg}/>
     </div>
-    <div>
-       <h1>MEnu to be displayed here</h1>
+
+  
+      
+       <div className=" flex flex-wrap p-4 m-4 justify-center ">
+       
+       <div>
+        {Object.values(restaurant.data.menu.items).map((e)=>{
+           return(
+           <MenuCard isBestSeller={e.isBestSeller} veg={e.isVeg} name={e.name} price={e.price} description={e.description} cloudinaryImageId={e.cloudinaryImageId}/>
+           )
+        })}
+       </div>
+       </div>
+    
     </div>
-    </>
     ))
 }
 

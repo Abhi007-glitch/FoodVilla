@@ -1,7 +1,7 @@
 {
   "name": "foodvilla",
   "version": "1.0.0",
-  "description": "Swiggy Clone",
+  "description": "",
   "scripts": {
     "test": "jest",
     "start": "parcel index.html",
@@ -9,9 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/Abhi007-glitch/FoodVilla.git"
+    "url": "git+https://github.com/Abhi007-glitch/FoodVilla.git"
   },
-  "author": "abhi9",
+  "author": "abhinav",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Abhi007-glitch/FoodVilla/issues"
@@ -20,10 +20,12 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.8.1"
+    "react-router-dom": "^6.9.0"
   },
   "devDependencies": {
     "parcel": "^2.8.3",
-    "process": "^0.11.10"
+    "postcss": "^8.4.21",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.2.7"
   }
 }
