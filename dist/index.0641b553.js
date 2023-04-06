@@ -34838,7 +34838,7 @@ $RefreshReg$(_c, "RestaurantMenu");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-router-dom":"9xmpe","react":"21dqq","../components/Shimmer":"g6ZGj","./config":"4T6KH","../utils/useRestaurantMenu":"fMOkH","./RestaurantHead":"jzwvT","./MenuCard":"3OOKb","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../utils/getDetails":"irUte","./Accordian":"gg1Kx"}],"fMOkH":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react-router-dom":"9xmpe","react":"21dqq","../components/Shimmer":"g6ZGj","./config":"4T6KH","../utils/useRestaurantMenu":"fMOkH","./RestaurantHead":"jzwvT","./MenuCard":"3OOKb","../utils/getDetails":"irUte","./Accordian":"gg1Kx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fMOkH":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$253c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
