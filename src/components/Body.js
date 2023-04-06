@@ -26,7 +26,7 @@ const Body =  ()=>{
     
      //created a custom hook for is Online/Offline feature.
     const isOnline = useOnlineStatus();
-    console.log(isOnline)
+ 
    
     if (!isOnline)
     {
